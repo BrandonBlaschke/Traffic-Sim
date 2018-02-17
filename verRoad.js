@@ -3,18 +3,10 @@ class VerRoad extends Road {
   constructor(game, x, y, distance) {
     super(game, x, y, distance);
     this.middleRoad = this.roadWidth / 2 + this.x - (this.lineThickness / 2);
+    this.carSpacing = 200;
   }
 
   update() {
-
-    //Update Cars
-    for (let i = 0; i < this.cars.length; i++) {
-      if (this.cars[i].direction === 2) {
-        this.cars[i].x = this.middleRoad + this.cars[i].width;
-      } else {
-        this.cars[i].x = this.middleRoad - this.cars[i].width * 1.5;
-      }
-    }
 
   }
 
@@ -31,5 +23,17 @@ class VerRoad extends Road {
     // }
 
   }
+
+    addCar(theCar) {
+
+      if (theCar.direction === 2) {
+        theCar.x = this.middleRoad + theCar.width;
+      } else {
+        theCar.x = this.middleRoad - theCar.width * 1.5;
+      }
+
+      theCar.y += this.carSpacing * this.cars.length; 
+      this.cars.push(theCar);
+    }
 
 }

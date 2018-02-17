@@ -24,6 +24,6 @@ class Road {
 
 
   addCar(theCar) {
-    this.cars.push(theCar);
+    this.cars.push(theCar.x);
   }
 }

@@ -66,24 +66,39 @@ AM.downloadAll(function() {
   var gameEngine = new GameEngine();
 
   //Create Sim
-  let roadVer = new VerRoad(gameEngine, 100, 400, 400);
-  let road = new HorRoad(gameEngine, 0, 10, 800);
+  //Roads
+  let roadHorVer = new VerRoad(gameEngine, 380, 0, 800);
+  let roadHor = new HorRoad(gameEngine, 0, 300, 800);
+
+  //Cars
   let car = new Car(gameEngine, true, 0);
   let car2 = new Car(gameEngine, true, 1);
   let car3 = new Car(gameEngine, false, 2);
   let car4 = new Car(gameEngine, false, 3);
-  road.addCar(car);
-  road.addCar(car2);
-  roadVer.addCar(car3);
-  roadVer.addCar(car4);
+  let car5 = new Car(gameEngine, false, 3);
+  let car6 = new Car(gameEngine, true, 0);
+  let car7 = new Car(gameEngine, true, 1);
+
+
+  //Add cars to roadHor
+  roadHor.addCar(car);
+  roadHor.addCar(car2);
+  roadHor.addCar(car6);
+  roadHor.addCar(car7);
+  roadHorVer.addCar(car5);
+  roadHorVer.addCar(car3);
+  roadHorVer.addCar(car4);
 
   //Add Entites to game engine
-  gameEngine.addEntity(road);
-  gameEngine.addEntity(roadVer);
+  gameEngine.addEntity(roadHor);
+  gameEngine.addEntity(roadHorVer);
   gameEngine.addEntity(car);
   gameEngine.addEntity(car2);
   gameEngine.addEntity(car3);
   gameEngine.addEntity(car4);
+  gameEngine.addEntity(car5);
+  gameEngine.addEntity(car6);
+  gameEngine.addEntity(car7);
 
   //Start Game engine
   gameEngine.init(ctx);

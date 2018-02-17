@@ -1,20 +1,17 @@
 class HorRoad extends Road {
 
+
   constructor(game, x, y, distance) {
     super(game, x, y, distance);
     this.middleRoad = this.roadWidth / 2 + this.y - (this.lineThickness / 2);
+
+    //Initial Spacing for cars on the road
+    this.carSpacing = 100;
   }
 
   update() {
 
-    //Update Cars
-    for (let i = 0; i < this.cars.length; i++) {
-      if (this.cars[i].direction === 0) {
-        this.cars[i].y = this.middleRoad - this.cars[i].width * 1.5;
-      } else {
-        this.cars[i].y = this.middleRoad + this.cars[i].width;
-      }
-    }
+
   }
 
   draw(ctx) {
@@ -29,6 +26,20 @@ class HorRoad extends Road {
     //   ctx.fillRect((this.x + 1) * i, this.middleRoad, this.lineWidth, this.lineThickness);
     // }
 
+  }
+
+  addCar(theCar) {
+
+    //Put car on the correct aligment with the road
+    if (theCar.direction === 0) {
+      theCar.y = this.middleRoad - theCar.width * 1.5;
+    } else {
+      theCar.y = this.middleRoad + theCar.width;
+    }
+
+    theCar.x += this.cars.length * this.carSpacing;
+
+    this.cars.push(theCar);
   }
 
 }
