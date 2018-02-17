@@ -67,8 +67,9 @@ AM.downloadAll(function() {
 
   //Create Sim
   //Roads
-  let roadHorVer = new VerRoad(gameEngine, 380, 0, 800);
+  let roadVer = new VerRoad(gameEngine, 380, 0, 800);
   let roadHor = new HorRoad(gameEngine, 0, 300, 800);
+  let fourWay = new FourWay(gameEngine, 380, 300);
 
   //Cars
   let car = new Car(gameEngine, true, 0);
@@ -85,13 +86,14 @@ AM.downloadAll(function() {
   roadHor.addCar(car2);
   roadHor.addCar(car6);
   roadHor.addCar(car7);
-  roadHorVer.addCar(car5);
-  roadHorVer.addCar(car3);
-  roadHorVer.addCar(car4);
+  roadVer.addCar(car5);
+  roadVer.addCar(car3);
+  roadVer.addCar(car4);
 
   //Add Entites to game engine
   gameEngine.addEntity(roadHor);
-  gameEngine.addEntity(roadHorVer);
+  gameEngine.addEntity(roadVer);
+  gameEngine.addEntity(fourWay);
   gameEngine.addEntity(car);
   gameEngine.addEntity(car2);
   gameEngine.addEntity(car3);

@@ -1,3 +1,6 @@
+let directionEnum = {RIGHT: 0, LEFT: 1, UP: 2, DOWN: 3};
+let drawHitBoxes = false;
+
 class Car {
 
   constructor(game, isHor, direction) {
@@ -36,7 +39,7 @@ class Car {
 
     this.stopped = false;
 
-    //Check If car is too close to other cars
+    //Check If car is too close to other cars or at stop light
     for (let i = 0; i < this.game.entities.length; i++) {
       if (this.game.entities[i] instanceof Car) {
 
@@ -44,11 +47,37 @@ class Car {
           if (this.carToClose(this.game.entities[i])) {
             this.stopped = true;
           }
-        }
-
       }
     }
 
+    //Check Traffic lights
+    if (this.game.entities[i] instanceof FourWay) {
+
+      if (this.direction === directionEnum.UP) {
+        if (this.intersects(this.hitBoxFront, this.game.entities[i].bottomBox) && this.game.entities[i].verColor == colorsEnum.RED) {
+          this.stopped = true;
+        }
+      }
+
+      if (this.direction === directionEnum.DOWN) {
+        if (this.intersects(this.hitBoxFront, this.game.entities[i].topBox) && this.game.entities[i].verColor == colorsEnum.RED) {
+          this.stopped = true;
+        }
+      }
+
+      if (this.direction === directionEnum.LEFT) {
+        if (this.intersects(this.hitBoxFront, this.game.entities[i].rightBox) && this.game.entities[i].horColor == colorsEnum.RED) {
+          this.stopped = true;
+        }
+      }
+
+      if (this.direction === directionEnum.RIGHT) {
+        if (this.intersects(this.hitBoxFront, this.game.entities[i].leftBox) && this.game.entities[i].horColor == colorsEnum.RED) {
+          this.stopped = true;
+        }
+      }
+    }
+  }
     //Move to the left and right
     if (this.isHor && this.direction === 0 && !this.stopped) {
 
@@ -145,11 +174,14 @@ class Car {
   draw(ctx) {
 
     //Draw hitBoxFront for front
-    ctx.fillStyle = "black";
-    ctx.fillRect(this.hitBoxFront.x, this.hitBoxFront.y, this.hitBoxFront.width, this.hitBoxFront.height);
-    
-    ctx.fillStyle = "blue";
-    ctx.fillRect(this.hitBoxBack.x, this.hitBoxBack.y, this.hitBoxBack.width, this.hitBoxBack.height);
+    if (drawHitBoxes) {
+      ctx.fillStyle = "black";
+      ctx.fillRect(this.hitBoxFront.x, this.hitBoxFront.y, this.hitBoxFront.width, this.hitBoxFront.height);
+
+      ctx.fillStyle = "blue";
+      ctx.fillRect(this.hitBoxBack.x, this.hitBoxBack.y, this.hitBoxBack.width, this.hitBoxBack.height);
+
+    }
 
     //Draw car
     ctx.fillStyle = this.color;
@@ -176,9 +208,9 @@ class Car {
     }
 
     //Check collision at a 4 way intersection
-    else if (this.intersects(this.hitBoxFront, car.hitBoxFront)) {
-      return true;
-    }
+    // else if (this.intersects(this.hitBoxFront, car.hitBoxFront)) {
+    //   return true;
+    // }
 
     return false;
   };
