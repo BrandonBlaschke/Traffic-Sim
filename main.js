@@ -67,40 +67,72 @@ AM.downloadAll(function() {
 
   //Create Sim
   //Roads
+  //let directionEnum = {RIGHT: 0, LEFT: 1, UP: 2, DOWN: 3};
+
   let roadVer = new VerRoad(gameEngine, 380, 0, 800);
-  let roadHor = new HorRoad(gameEngine, 0, 300, 800);
-  let fourWay = new FourWay(gameEngine, 380, 300);
+  let roadHor = new HorRoad(gameEngine, 0, 500, 800);
+  let roadHor2 = new HorRoad(gameEngine,0, 200, 800);
+
+  let fourWay = new FourWay(gameEngine, 380, 500);
+  let fourWay2 = new FourWay(gameEngine, 380, 200);
+
+
 
   //Cars
-  let car = new Car(gameEngine, true, 0);
-  let car2 = new Car(gameEngine, true, 1);
-  let car3 = new Car(gameEngine, false, 2);
-  let car4 = new Car(gameEngine, false, 3);
-  let car5 = new Car(gameEngine, false, 3);
-  let car6 = new Car(gameEngine, true, 0);
-  let car7 = new Car(gameEngine, true, 1);
+  // let car = new Car(gameEngine, true, directionEnum.RIGHT);
+  // let car2 = new Car(gameEngine, true, directionEnum.LEFT);
+  // let car3 = new Car(gameEngine, false, directionEnum.UP);
+  // let car4 = new Car(gameEngine, false, directionEnum.DOWN);
+  // let car5 = new Car(gameEngine, false, directionEnum.DOWN);
+  // let car6 = new Car(gameEngine, true, directionEnum.RIGHT);
+  // let car7 = new Car(gameEngine, true, directionEnum.LEFT);
 
 
   //Add cars to roadHor
-  roadHor.addCar(car);
-  roadHor.addCar(car2);
-  roadHor.addCar(car6);
-  roadHor.addCar(car7);
-  roadVer.addCar(car5);
-  roadVer.addCar(car3);
-  roadVer.addCar(car4);
+  // roadHor.addCar(car);
+  // roadHor.addCar(car2);
+  // roadHor.addCar(car6);
+  // roadHor.addCar(car7);
+  // roadVer.addCar(car5);
+  // roadVer.addCar(car3);
+  // roadVer.addCar(car4);
 
   //Add Entites to game engine
   gameEngine.addEntity(roadHor);
+  gameEngine.addEntity(roadHor2);
   gameEngine.addEntity(roadVer);
   gameEngine.addEntity(fourWay);
-  gameEngine.addEntity(car);
-  gameEngine.addEntity(car2);
-  gameEngine.addEntity(car3);
-  gameEngine.addEntity(car4);
-  gameEngine.addEntity(car5);
-  gameEngine.addEntity(car6);
-  gameEngine.addEntity(car7);
+  gameEngine.addEntity(fourWay2);
+
+  for (let i = 0; i < 17; i++) {
+
+    //Get a random direction
+    let direction = Math.floor((Math.random() * 3));
+    let roadDir;
+    let car;
+
+    //Set Direction
+    if (direction > 1) {
+      roadDir = false;
+      car = new Car(gameEngine, roadDir, direction);
+      roadVer.addCar(car);
+    } else {
+      roadDir = true;
+      car = new Car(gameEngine, roadDir, direction);
+      roadHor.addCar(car);
+    }
+
+    //add car
+    gameEngine.addEntity(car);
+  }
+
+  // gameEngine.addEntity(car);
+  // gameEngine.addEntity(car2);
+  // gameEngine.addEntity(car3);
+  // gameEngine.addEntity(car4);
+  // gameEngine.addEntity(car5);
+  // gameEngine.addEntity(car6);
+  // gameEngine.addEntity(car7);
 
   //Start Game engine
   gameEngine.init(ctx);
