@@ -1,21 +1,19 @@
 let directionEnum = {RIGHT: 0, LEFT: 1, UP: 2, DOWN: 3};
-let drawHitBoxes = false;
+let drawHitBoxes = true;
 
 class Car {
 
   constructor(game, isHor, direction) {
     this.x = 0;
     this.y = 0;
+    this.velocity = {x: 0, y: 0};
+    this.acceleration = {x: 0, y: 0};
     this.game = game;
     this.width = 20;
     this.height = 30;
     this.color = '#E00000';
     this.lineColor = 'yellow';
     this.isHor = isHor;
-    //0 = Right
-    //1 = Left
-    //2 = Up
-    //3 = Down
     this.direction = direction;
     this.hitBoxWidth = 10;
     this.hitBoxHeight = 30;
@@ -84,7 +82,9 @@ class Car {
       if (this.x > 800) {
         this.x = -this.width * 5;
       }
+
       this.x += this.speed;
+
       //Move to right and left
     } else if (this.isHor && this.direction === 1 && !this.stopped) {
       if (this.x <= 0) {

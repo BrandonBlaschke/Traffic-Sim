@@ -14,6 +14,8 @@ class FourWay extends Road {
     this.rightBox = {x: x + 90, y: y, width: 10, height: 100, color: this.horColor};
     this.topBox = {x: x, y: y, width: 100, height: 10, color: this.horColor};
     this.bottomBox = {x: x, y: y + 90, width: 100, height: 10, color: this.horColor};
+
+    window.setInterval(this.toggleLight, 6000);
   }
 
   update() {
@@ -33,14 +35,14 @@ class FourWay extends Road {
         this.verColor = colorsEnum.RED;
       }
 
-      window.setInterval(this.toggleLight, 6000);
+
       changeLight = false;
     }
   }
 
   toggleLight() {
     changeLight = true;
-    clearInterval(); 
+    clearInterval();
     //console.log("SWITCH");
   }
 
