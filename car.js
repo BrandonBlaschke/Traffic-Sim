@@ -1,5 +1,5 @@
 let directionEnum = {RIGHT: 0, LEFT: 1, UP: 2, DOWN: 3};
-let drawHitBoxes = true;
+let drawHitBoxes = false;
 
 class Car {
 
@@ -44,6 +44,9 @@ class Car {
         if (this.game.entities[i] != this) {
           if (this.carToClose(this.game.entities[i])) {
             this.stopped = true;
+
+            //Reset speed values
+            this.resetSpeed();
           }
       }
     }
@@ -54,63 +57,52 @@ class Car {
       if (this.direction === directionEnum.UP) {
         if (this.intersects(this.hitBoxFront, this.game.entities[i].bottomBox) && this.game.entities[i].verColor == colorsEnum.RED) {
           this.stopped = true;
+          this.resetSpeed();
         }
       }
 
       if (this.direction === directionEnum.DOWN) {
         if (this.intersects(this.hitBoxFront, this.game.entities[i].topBox) && this.game.entities[i].verColor == colorsEnum.RED) {
+          this.resetSpeed();
           this.stopped = true;
         }
       }
 
       if (this.direction === directionEnum.LEFT) {
         if (this.intersects(this.hitBoxFront, this.game.entities[i].rightBox) && this.game.entities[i].horColor == colorsEnum.RED) {
+          this.resetSpeed();
           this.stopped = true;
         }
       }
 
       if (this.direction === directionEnum.RIGHT) {
         if (this.intersects(this.hitBoxFront, this.game.entities[i].leftBox) && this.game.entities[i].horColor == colorsEnum.RED) {
+          this.resetSpeed();
           this.stopped = true;
         }
       }
     }
   }
-    //Move to the left and right
+
+    //Move from left to right
     if (this.isHor && this.direction === 0 && !this.stopped) {
-
-      if (this.x > 800) {
-        this.x = -this.width * 5;
-      }
-
-      this.x += this.speed;
-
-      //Move to right and left
+      this.goRight();
+      //Move from right to left
     } else if (this.isHor && this.direction === 1 && !this.stopped) {
-      if (this.x <= 0) {
-        this.x = 800 + this.width * 5;
-      }
-      this.x -= this.speed;
+      this.goLeft();
       //Move Up
     } else if (this.direction === 2 && !this.stopped) {
-      if (this.y < 0) {
-        this.y = 800 + this.width * 5;
-      }
-      this.y -= this.speed;
+      this.goUp();
       //Move Down
     } else if (!this.stopped) {
-      if (this.y > 800) {
-        this.y = 0 - this.width * 5;
-      }
-      this.y += this.speed;
+      this.goDown();
     }
-
 
     //Hit box in right orientation
     if (this.isHor) {
 
       //Make sure the hit boxes are in the right position
-      if (this.direction === 1) {
+      if (this.direction === directionEnum.LEFT) {
         this.hitBoxFront = {
           x: this.x - this.width,
           y: this.y,
@@ -130,6 +122,7 @@ class Car {
           width: this.height,
           height: this.width
         };
+        //console.log(this.hitBoxFront.x);
         this.hitBoxBack = {
           x: this.x - this.width,
           y: this.y,
@@ -140,7 +133,7 @@ class Car {
     } else {
 
       //Make sure hit boxes are in the right position
-      if (this.direction === 2) {
+      if (this.direction === directionEnum.UP) {
         this.hitBoxFront = {
           x: this.x,
           y: this.y - this.width,
@@ -169,6 +162,62 @@ class Car {
       }
     }
 
+
+  }
+
+  resetSpeed() {
+    //Reset speed values
+    this.velocity.x = 0;
+    this.velocity.y = 0;
+    this.acceleration.x = 0;
+    this.acceleration.y = 0;
+  }
+
+  /** Moves the car to the right */
+  goRight() {
+    if (this.x > 800) {
+      this.x = -this.width * 5;
+    }
+
+    // if (this.acceleration.x < .35) {
+    //   this.acceleration.x = (parseFloat(this.acceleration.x) + parseFloat(.01)).toFixed(2);
+    //   this.velocity.x = (parseFloat(this.velocity.x) + parseFloat(this.acceleration.x)).toFixed(2);
+    // }
+    // this.x = (parseFloat(this.velocity.x) + parseFloat(this.x)).toFixed(2);
+
+    this.x += this.speed;
+  }
+
+  /** Moves the car to the left */
+  goLeft() {
+    if (this.x <= 0) {
+      this.x = 800 + this.width * 5;
+    }
+    this.x -= this.speed;
+  }
+
+  /** Moves the car up */
+  goUp() {
+    if (this.y < 0) {
+      this.y = 800 + this.width * 5;
+    }
+    this.y -= this.speed;
+  }
+
+  /** Moves the car down */
+  goDown() {
+    if (this.y > 800) {
+      this.y = 0 - this.width * 5;
+    }
+    this.y += this.speed;
+  }
+
+  addFloats(num1, num2) {
+    return (parseFloat(num1) + parseFloat(num2)).toFixed(2);
+  }
+
+  subFloats(num1, num2) {
+    return (parseFloat(num1) - parseFloat(num2)).toFixed(2);
   }
 
   draw(ctx) {
