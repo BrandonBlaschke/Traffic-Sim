@@ -1,5 +1,4 @@
 let colorsEnum = {RED:0, GREEN: 1, YELLOW: 2};
-let changeLight = true;
 
 class FourWay extends Road {
 
@@ -14,14 +13,14 @@ class FourWay extends Road {
     this.rightBox = {x: x + 90, y: y, width: 10, height: 100, color: this.horColor};
     this.topBox = {x: x, y: y, width: 100, height: 10, color: this.horColor};
     this.bottomBox = {x: x, y: y + 90, width: 100, height: 10, color: this.horColor};
-
-    window.setInterval(this.toggleLight, 2000);
+    this.changeLight = false;
+    //window.setInterval(this.toggleLight, 2000);
   }
 
   update() {
 
     //Change the color of the four way stop
-    if (changeLight) {
+    if (this.changeLight) {
 
       if (this.horColor == colorsEnum.RED) {
         this.horColor = colorsEnum.GREEN;
@@ -35,13 +34,12 @@ class FourWay extends Road {
         this.verColor = colorsEnum.RED;
       }
 
-
-      changeLight = false;
+      this.changeLight = false;
     }
   }
 
   toggleLight() {
-    changeLight = true;
+    this.changeLight = true;
     //clearInterval();
     //console.log("SWITCH");
   }

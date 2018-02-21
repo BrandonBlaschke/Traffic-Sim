@@ -1,4 +1,5 @@
 var AM = new AssetManager();
+let ge;
 
 function Animation(spriteSheet, frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale) {
   this.spriteSheet = spriteSheet;
@@ -60,11 +61,12 @@ AM.queueDownload();
 
 
 AM.downloadAll(function() {
+
   var canvas = document.getElementById("gameWorld");
   var ctx = canvas.getContext("2d");
 
   var gameEngine = new GameEngine();
-
+  ge = gameEngine;
   //Create Sim
   //Roads
   //let directionEnum = {RIGHT: 0, LEFT: 1, UP: 2, DOWN: 3};
@@ -76,6 +78,8 @@ AM.downloadAll(function() {
   let fourWay = new FourWay(gameEngine, 380, 500);
   let fourWay2 = new FourWay(gameEngine, 380, 200);
 
+  //This will change the lights
+  window.setInterval(changeLights, 2000);
 
 
   //Cars
@@ -142,3 +146,12 @@ AM.downloadAll(function() {
 
   console.log("All Done!");
 });
+
+function changeLights() {
+  for (let i = 0; i < ge.entities.length; i++) {
+
+    if (ge.entities[i] instanceof FourWay) {
+      ge.entities[i].toggleLight();
+    }
+  }
+}
