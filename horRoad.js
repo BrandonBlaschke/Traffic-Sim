@@ -21,10 +21,10 @@ class HorRoad extends Road {
     ctx.fillRect(this.x, this.y, this.distance, this.roadWidth);
 
     // //Draw lines on raod
-    // ctx.fillStyle = "white";
-    // for (let i = 0; i < this.distance; i += this.lineSpace) {
-    //   ctx.fillRect((this.x + 1) * i, this.middleRoad, this.lineWidth, this.lineThickness);
-    // }
+    ctx.fillStyle = "white";
+    for (let i = 0; i < this.distance; i += this.lineSpace) {
+      ctx.fillRect((this.x + 1) * i, this.middleRoad, this.lineWidth, this.lineThickness);
+    }
 
   }
 

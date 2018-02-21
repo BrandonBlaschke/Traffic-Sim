@@ -1,5 +1,5 @@
 var AM = new AssetManager();
-let ge;
+let globalGE;
 
 function Animation(spriteSheet, frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale) {
   this.spriteSheet = spriteSheet;
@@ -66,9 +66,11 @@ AM.downloadAll(function() {
   var ctx = canvas.getContext("2d");
 
   var gameEngine = new GameEngine();
-  ge = gameEngine;
+
+  //Global gameEngine object
+  globalGE = gameEngine;
+
   //Create Sim
-  //Roads
   //let directionEnum = {RIGHT: 0, LEFT: 1, UP: 2, DOWN: 3};
 
   let roadVer = new VerRoad(gameEngine, 380, 0, 800);
@@ -79,27 +81,7 @@ AM.downloadAll(function() {
   let fourWay2 = new FourWay(gameEngine, 380, 200);
 
   //This will change the lights
-  window.setInterval(changeLights, 2000);
-
-
-  //Cars
-  // let car = new Car(gameEngine, true, directionEnum.RIGHT);
-  // let car2 = new Car(gameEngine, true, directionEnum.LEFT);
-  // let car3 = new Car(gameEngine, false, directionEnum.UP);
-  // let car4 = new Car(gameEngine, false, directionEnum.DOWN);
-  // let car5 = new Car(gameEngine, false, directionEnum.DOWN);
-  // let car6 = new Car(gameEngine, true, directionEnum.RIGHT);
-  // let car7 = new Car(gameEngine, true, directionEnum.LEFT);
-
-
-  //Add cars to roadHor
-  // roadHor.addCar(car);
-  // roadHor.addCar(car2);
-  // roadHor.addCar(car6);
-  // roadHor.addCar(car7);
-  // roadVer.addCar(car5);
-  // roadVer.addCar(car3);
-  // roadVer.addCar(car4);
+  window.setInterval(changeLights, 1500);
 
   //Add Entites to game engine
   gameEngine.addEntity(roadHor);
@@ -108,10 +90,12 @@ AM.downloadAll(function() {
   gameEngine.addEntity(fourWay);
   gameEngine.addEntity(fourWay2);
 
-  for (let i = 0; i < 17; i++) {
+  //Add random cars to Sim
+  for (let i = 0; i < 25; i++) {
 
     //Get a random direction
     let direction = Math.floor((Math.random() * 3));
+    // let direction = 0;
     let roadDir;
     let car;
 
@@ -123,35 +107,33 @@ AM.downloadAll(function() {
     } else {
       roadDir = true;
       car = new Car(gameEngine, roadDir, direction);
-      roadHor.addCar(car);
+
+      let randomRoad = Math.floor((Math.random() * 2));
+
+      //Add to random horzontal road
+      if (randomRoad == 0) {
+        roadHor.addCar(car);
+      } else {
+        roadHor2.addCar(car);
+      }
     }
 
     //add car
     gameEngine.addEntity(car);
   }
 
-  // gameEngine.addEntity(car);
-  // gameEngine.addEntity(car2);
-  // gameEngine.addEntity(car3);
-  // gameEngine.addEntity(car4);
-  // gameEngine.addEntity(car5);
-  // gameEngine.addEntity(car6);
-  // gameEngine.addEntity(car7);
-
   //Start Game engine
   gameEngine.init(ctx);
   gameEngine.start();
 
-  //gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background.jpg")));
-
-  console.log("All Done!");
 });
 
+/** Changes the Fourway stop lights */
 function changeLights() {
-  for (let i = 0; i < ge.entities.length; i++) {
+  for (let i = 0; i < globalGE.entities.length; i++) {
 
-    if (ge.entities[i] instanceof FourWay) {
-      ge.entities[i].toggleLight();
+    if (globalGE.entities[i] instanceof FourWay) {
+      globalGE.entities[i].toggleLight();
     }
   }
 }

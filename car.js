@@ -12,7 +12,6 @@ class Car {
     this.width = 20;
     this.height = 30;
     this.color = '#E00000';
-    this.lineColor = 'yellow';
     this.isHor = isHor;
     this.direction = direction;
     this.hitBoxWidth = 10;
@@ -122,7 +121,6 @@ class Car {
           width: this.height,
           height: this.width
         };
-        //console.log(this.hitBoxFront.x);
         this.hitBoxBack = {
           x: this.x - this.width,
           y: this.y,
@@ -178,12 +176,12 @@ class Car {
     if (this.x > 800) {
       this.x = -this.width * 5;
     }
-
-    // if (this.acceleration.x < .35) {
-    //   this.acceleration.x = (parseFloat(this.acceleration.x) + parseFloat(.01)).toFixed(2);
+    //
+    // if (this.acceleration.x < .3 && this.velocity.x < 3) {
+    //   this.acceleration.x = (parseFloat(this.acceleration.x) + parseFloat(.008)).toFixed(2);
     //   this.velocity.x = (parseFloat(this.velocity.x) + parseFloat(this.acceleration.x)).toFixed(2);
     // }
-    // this.x = (parseFloat(this.velocity.x) + parseFloat(this.x)).toFixed(2);
+    // this.x = (parseFloat(this.velocity.x) + parseFloat(this.x)).toFixed(1);
 
     this.x += this.speed;
   }
@@ -256,11 +254,6 @@ class Car {
       return true;
     }
 
-    //Check collision at a 4 way intersection
-    // else if (this.intersects(this.hitBoxFront, car.hitBoxFront)) {
-    //   return true;
-    // }
-
     return false;
   };
 
@@ -271,7 +264,12 @@ class Car {
    * @return {boolean} If the two boxes are intersecting
    */
   intersects(rect1, rect2) {
+
     return rect1.x < rect2.x + rect2.width && rect1.x + rect1.width > rect2.x &&
       rect1.y < rect2.y + rect2.height && rect1.height + rect1.y > rect2.y;
+
+
+    // return rect1.x < this.addFloats(rect2.x, rect2.width) && this.addFloats(rect1.x, rect1.width) > rect2.x &&
+    //   rect1.y < this.addFloats(rect2.y, rect2.height) && this.addFloats(rect1.height, rect1.y) > rect2.y;
   };
 }

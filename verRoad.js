@@ -17,10 +17,10 @@ class VerRoad extends Road {
     ctx.fillRect(this.x, this.y, this.roadWidth, this.distance);
 
     //Draw lines on raod
-    // ctx.fillStyle = "white";
-    // for (let i = 0; i < this.distance; i += this.lineSpace) {
-    //   ctx.fillRect(this.middleRoad, -(this.y + 1) * i + this.distance, this.lineThickness, this.lineWidth);
-    // }
+    ctx.fillStyle = "white";
+    for (let i = 0; i < this.distance; i += this.lineSpace) {
+      ctx.fillRect(this.middleRoad, -(this.y + 1) * i + this.distance, this.lineThickness, this.lineWidth);
+    }
 
   }
 
@@ -32,7 +32,7 @@ class VerRoad extends Road {
         theCar.x = this.middleRoad - theCar.width * 1.5;
       }
 
-      theCar.y += this.carSpacing * this.cars.length; 
+      theCar.y += this.carSpacing * this.cars.length;
       this.cars.push(theCar);
     }
 
