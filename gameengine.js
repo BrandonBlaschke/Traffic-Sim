@@ -14,6 +14,7 @@ function GameEngine() {
     this.ctx = null;
     this.surfaceWidth = null;
     this.surfaceHeight = null;
+    this.carsMadeIt = 0; 
 }
 
 GameEngine.prototype.init = function (ctx) {

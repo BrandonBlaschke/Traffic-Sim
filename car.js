@@ -9,6 +9,7 @@ class Car {
     this.velocity = {x: 0, y: 0};
     this.acceleration = {x: 0, y: 0};
     this.game = game;
+    this.carMadeIt = false;
     this.width = 20;
     this.height = 30;
     this.color = '#E00000';
@@ -175,6 +176,15 @@ class Car {
   goRight() {
     if (this.x > 800) {
       this.x = -this.width * 5;
+      this.carMadeIt = true;
+    } else {
+      this.carMadeIt = false;
+    }
+
+    //Count the cars that made it
+    if (this.carMadeIt) {
+      this.game.carsMadeIt += 1;
+      this.carMadeIt = false;
     }
     //
     // if (this.acceleration.x < .3 && this.velocity.x < 3) {
@@ -190,6 +200,14 @@ class Car {
   goLeft() {
     if (this.x <= 0) {
       this.x = 800 + this.width * 5;
+      this.carMadeIt = true;
+    } else {
+      this.carMadeIt = false;
+    }
+
+    if (this.carMadeIt) {
+      this.game.carsMadeIt += 1;
+      this.carMadeIt = false;
     }
     this.x -= this.speed;
   }
@@ -198,7 +216,16 @@ class Car {
   goUp() {
     if (this.y < 0) {
       this.y = 800 + this.width * 5;
+      this.carMadeIt = true;
+    } else {
+      this.carMadeIt = false;
     }
+
+    if (this.carMadeIt) {
+      this.carMadeIt = false;
+      this.game.carsMadeIt += 1;
+    }
+
     this.y -= this.speed;
   }
 
@@ -206,6 +233,14 @@ class Car {
   goDown() {
     if (this.y > 800) {
       this.y = 0 - this.width * 5;
+      this.carMadeIt = true;
+    } else {
+      this.carMadeIt = false;
+    }
+
+    if (this.carMadeIt) {
+      this.carMadeIt = false;
+      this.game.carsMadeIt += 1;
     }
     this.y += this.speed;
   }

@@ -40,7 +40,6 @@ class FourWay extends Road {
 
   toggleLight() {
     this.changeLight = true;
-    //clearInterval();
     //console.log("SWITCH");
   }
 

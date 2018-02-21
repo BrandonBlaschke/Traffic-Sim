@@ -81,7 +81,7 @@ AM.downloadAll(function() {
   let fourWay2 = new FourWay(gameEngine, 380, 200);
 
   //This will change the lights
-  window.setInterval(changeLights, 1500);
+  window.setInterval(changeLights, 2000);
 
   //Add Entites to game engine
   gameEngine.addEntity(roadHor);
@@ -94,7 +94,7 @@ AM.downloadAll(function() {
   for (let i = 0; i < 25; i++) {
 
     //Get a random direction
-    let direction = Math.floor((Math.random() * 3));
+    let direction = Math.floor((Math.random() * 4));
     // let direction = 0;
     let roadDir;
     let car;
@@ -136,4 +136,6 @@ function changeLights() {
       globalGE.entities[i].toggleLight();
     }
   }
+
+  console.log("Cars that made it Left " + globalGE.carsMadeIt);
 }
