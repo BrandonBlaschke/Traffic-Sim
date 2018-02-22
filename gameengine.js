@@ -14,7 +14,7 @@ function GameEngine() {
     this.ctx = null;
     this.surfaceWidth = null;
     this.surfaceHeight = null;
-    this.carsMadeIt = 0; 
+    this.carsMadeIt = 0;
 }
 
 GameEngine.prototype.init = function (ctx) {
@@ -49,6 +49,18 @@ GameEngine.prototype.draw = function () {
 }
 
 GameEngine.prototype.update = function () {
+
+    //Update HTML tag
+    $("#amount").html(this.carsMadeIt);
+    // lightTime = $("#myRange").val();
+    // $("#time").html("" + lightTime / 1000);
+    //
+    // //When done with slider reset clock
+    // $("#myRange").on("click", function(event, ui) {
+    //   console.log("CHECL");
+    //   window.clearInterval();
+    // });
+
     var entitiesCount = this.entities.length;
 
     for (var i = 0; i < entitiesCount; i++) {

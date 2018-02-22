@@ -13,6 +13,7 @@
     <script type="text/javascript" src="./car.js"></script>
     <script type="text/javascript" src="./main.js"></script>
     <script type="text/javascript" src="./fourWay.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
 </head>
 
 <style>
@@ -25,8 +26,67 @@
     width: 800px;
     height: 800px;
 }
+
+#info {
+  display: inline;
+}
+
+.text {
+  font-size: 30px;
+}
+
+.slidecontainer {
+    width: 50%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #0bc5ea;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #0bc5ea;
+    cursor: pointer;
+}
 </style>
 <body>
     <canvas id="gameWorld" tabindex="1" width = "800px" height = "800px" style="border: 1px solid brown; background: #2AE82A"></canvas>
+
+    <div id="info">
+    <span id="carsPassed" class="text">Cars that reached end of road:</span>
+    <span id="amount" class="text">0</span>
+    </div>
+    <p></p>
+
+    <!-- <div id="info">
+    <span class="text">Set Time For Lights</span>
+    <span class="text" id="time">2</span>
+    <span class="text"> sec</span>
+    </div>
+
+    <div class="slidecontainer">
+    <input type="range" min="1000" max="10000" value="2500" class="slider" id="myRange">
+    </div> -->
 </body>
 </html>

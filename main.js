@@ -1,5 +1,6 @@
 var AM = new AssetManager();
 let globalGE;
+let lightTime = 2000; 
 
 function Animation(spriteSheet, frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale) {
   this.spriteSheet = spriteSheet;
@@ -81,7 +82,7 @@ AM.downloadAll(function() {
   let fourWay2 = new FourWay(gameEngine, 380, 200);
 
   //This will change the lights
-  window.setInterval(changeLights, 2000);
+  window.setInterval(changeLights, lightTime);
 
   //Add Entites to game engine
   gameEngine.addEntity(roadHor);
@@ -136,6 +137,4 @@ function changeLights() {
       globalGE.entities[i].toggleLight();
     }
   }
-
-  console.log("Cars that made it Left " + globalGE.carsMadeIt);
 }
