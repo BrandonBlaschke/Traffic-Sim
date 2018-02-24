@@ -1,6 +1,6 @@
 var AM = new AssetManager();
 let globalGE;
-let lightTime = 2000; 
+let lightTime = 2000;
 
 function Animation(spriteSheet, frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale) {
   this.spriteSheet = spriteSheet;
@@ -92,11 +92,11 @@ AM.downloadAll(function() {
   gameEngine.addEntity(fourWay2);
 
   //Add random cars to Sim
-  for (let i = 0; i < 25; i++) {
+  for (let i = 0; i < 30; i++) {
 
     //Get a random direction
     let direction = Math.floor((Math.random() * 4));
-    // let direction = 0;
+    // let direction = 1;
     let roadDir;
     let car;
 

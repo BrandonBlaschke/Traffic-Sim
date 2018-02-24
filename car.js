@@ -1,5 +1,6 @@
 let directionEnum = {RIGHT: 0, LEFT: 1, UP: 2, DOWN: 3};
 let drawHitBoxes = false;
+let probability = 8;
 
 class Car {
 
@@ -31,6 +32,8 @@ class Car {
     };
     this.stopped;
     this.speed = 5;
+    this.turnRight = false;
+    this.turnLeft = false;
   }
 
   update() {
@@ -58,6 +61,10 @@ class Car {
         if (this.intersects(this.hitBoxFront, this.game.entities[i].bottomBox) && this.game.entities[i].verColor == colorsEnum.RED) {
           this.stopped = true;
           this.resetSpeed();
+        } else if (this.turnRight && this.intersects(this.hitBoxFront, this.game.entities[i].turnRightForUp)) {
+          this.isHor = true;
+          this.direction = directionEnum.LEFT;
+          this.turnRight = false;
         }
       }
 
@@ -65,31 +72,44 @@ class Car {
         if (this.intersects(this.hitBoxFront, this.game.entities[i].topBox) && this.game.entities[i].verColor == colorsEnum.RED) {
           this.resetSpeed();
           this.stopped = true;
+        } else if (this.turnRight && this.intersects(this.hitBoxFront, this.game.entities[i].turnRightForDown)) {
+          this.direction = directionEnum.RIGHT;
+          this.isHor = true;
+          this.turnRight = false;
+        }
+      }
+
+      //NOTE THESE ARE BACKWARDS, havent fixed these yet, right and left four ways
+      if (this.direction === directionEnum.RIGHT) {
+        if (this.intersects(this.hitBoxFront, this.game.entities[i].rightBox) && this.game.entities[i].horColor == colorsEnum.RED) {
+          this.resetSpeed();
+          this.stopped = true;
+        } else if (this.turnRight && this.intersects(this.hitBoxFront, this.game.entities[i].turnRightForLeft)) {
+          this.direction = directionEnum.UP;
+          this.isHor = false;
+          this.turnRight = false
         }
       }
 
       if (this.direction === directionEnum.LEFT) {
-        if (this.intersects(this.hitBoxFront, this.game.entities[i].rightBox) && this.game.entities[i].horColor == colorsEnum.RED) {
-          this.resetSpeed();
-          this.stopped = true;
-        }
-      }
-
-      if (this.direction === directionEnum.RIGHT) {
         if (this.intersects(this.hitBoxFront, this.game.entities[i].leftBox) && this.game.entities[i].horColor == colorsEnum.RED) {
           this.resetSpeed();
           this.stopped = true;
+        } else if (this.turnRight && this.intersects(this.hitBoxFront, this.game.entities[i].turnRightForRight)){
+          this.direction = directionEnum.DOWN;
+          this.isHor = false;
+          this.turnRight = false;
         }
       }
     }
   }
 
-    //Move from left to right
+    //Move left
     if (this.isHor && this.direction === 0 && !this.stopped) {
-      this.goRight();
-      //Move from right to left
-    } else if (this.isHor && this.direction === 1 && !this.stopped) {
       this.goLeft();
+      //Move right
+    } else if (this.isHor && this.direction === 1 && !this.stopped) {
+      this.goRight();
       //Move Up
     } else if (this.direction === 2 && !this.stopped) {
       this.goUp();
@@ -102,7 +122,7 @@ class Car {
     if (this.isHor) {
 
       //Make sure the hit boxes are in the right position
-      if (this.direction === directionEnum.LEFT) {
+      if (this.direction === directionEnum.RIGHT) {
         this.hitBoxFront = {
           x: this.x - this.width,
           y: this.y,
@@ -177,6 +197,12 @@ class Car {
     if (this.x > 800) {
       this.x = -this.width * 5;
       this.carMadeIt = true;
+
+      //5% chance of turning right
+      if (Math.floor((Math.random() * probability)) == 1) {
+        this.turnRight = true;
+      }
+
     } else {
       this.carMadeIt = false;
     }
@@ -201,6 +227,12 @@ class Car {
     if (this.x <= 0) {
       this.x = 800 + this.width * 5;
       this.carMadeIt = true;
+
+      //5% chance of turning right
+      if (Math.floor((Math.random() * probability)) == 1) {
+        this.turnRight = true;
+      }
+
     } else {
       this.carMadeIt = false;
     }
@@ -217,6 +249,12 @@ class Car {
     if (this.y < 0) {
       this.y = 800 + this.width * 5;
       this.carMadeIt = true;
+
+      //5% chance of turning right
+      if (Math.floor((Math.random() * probability)) == 1) {
+        this.turnRight = true;
+      }
+
     } else {
       this.carMadeIt = false;
     }
@@ -234,6 +272,12 @@ class Car {
     if (this.y > 800) {
       this.y = 0 - this.width * 5;
       this.carMadeIt = true;
+
+      //5% chance of turning right
+      if (Math.floor((Math.random() * probability)) == 1) {
+        this.turnRight = true;
+      }
+
     } else {
       this.carMadeIt = false;
     }
