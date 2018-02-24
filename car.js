@@ -1,6 +1,6 @@
 let directionEnum = {RIGHT: 0, LEFT: 1, UP: 2, DOWN: 3};
 let drawHitBoxes = false;
-let probability = 8;
+let probability = 20;
 
 class Car {
 
@@ -14,6 +14,28 @@ class Car {
     this.width = 20;
     this.height = 30;
     this.color = '#E00000';
+
+    //Get a random color for the car
+    let randomColor = Math.floor((Math.random() * 5));
+
+    switch(randomColor) {
+      case 0:
+        this.color = '#27E1CF';
+        break;
+      case 1:
+        this.color = '#E00000';
+        break;
+      case 2:
+        this.color = '#E18A27';
+        break;
+      case 3:
+        this.color = '#05FF4B';
+        break;
+      case 4:
+        this.color = '#DDE3DE';
+        break;
+    }
+    
     this.isHor = isHor;
     this.direction = direction;
     this.hitBoxWidth = 10;
@@ -88,6 +110,10 @@ class Car {
           this.direction = directionEnum.UP;
           this.isHor = false;
           this.turnRight = false
+        } else if (this.turnLeft && this.intersects(this.hitBoxFront, this.game.entities[i].turnLeftForLeft)) {
+          this.direction = directionEnum.DOWN;
+          this.isHor = false;
+          this.turnLeft = false;
         }
       }
 
@@ -99,6 +125,10 @@ class Car {
           this.direction = directionEnum.DOWN;
           this.isHor = false;
           this.turnRight = false;
+        } else if (this.turnLeft && this.intersects(this.hitBoxFront, this.game.entities[i].turnLeftForRight)) {
+          this.direction = directionEnum.UP;
+          this.isHor = false;
+          this.turnLeft = false;
         }
       }
     }
@@ -203,6 +233,11 @@ class Car {
         this.turnRight = true;
       }
 
+      if (Math.floor((Math.random() * probability)) == 1) {
+        this.turnLeft = true;
+        this.turnRight = false;
+      }
+
     } else {
       this.carMadeIt = false;
     }
@@ -232,6 +267,12 @@ class Car {
       if (Math.floor((Math.random() * probability)) == 1) {
         this.turnRight = true;
       }
+
+       //5% chance of turning right
+      // if (true) {
+      //   this.turnRight = false;
+      //   this.turnLeft = true;
+      // }
 
     } else {
       this.carMadeIt = false;
