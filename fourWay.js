@@ -55,8 +55,8 @@ class FourWay extends Road {
     ctx.fillRect(this.x, this.y, this.size.width, this.size.height);
 
     //turnRightForRight
-    ctx.fillStyle = 'black';
-    ctx.fillRect(this.turnRightForDown.x, this.turnRightForDown.y, this.turnRightForDown.width, this.turnRightForDown.height);
+    // ctx.fillStyle = 'black';
+    // ctx.fillRect(this.turnRightForDown.x, this.turnRightForDown.y, this.turnRightForDown.width, this.turnRightForDown.height);
 
     //Hor lights
     if (this.horColor === colorsEnum.RED) {
