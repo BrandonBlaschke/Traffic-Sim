@@ -19,6 +19,10 @@ class FourWay extends Road {
     this.turnRightForLeft = {x: x + 35, y: y + 30, width: 15, height: 45};
     this.turnRightForUp = {x: x + 35, y: y + 34, width: 45, height: 15};
     this.turnRightForDown = {x: x + 35, y: y + 64, width: 45, height: 15};
+
+    //Turning left hit Box
+    this.turnLeftForRight = {x: x + 110, y: y + 30, width: 15, height: 45};
+    this.turnLeftForLeft = {x: x - 15, y: y + 30, width: 15, height: 45};
     this.changeLight = false;
     //window.setInterval(this.toggleLight, 2000);
   }
@@ -56,7 +60,7 @@ class FourWay extends Road {
 
     //turnRightForRight
     // ctx.fillStyle = 'black';
-    // ctx.fillRect(this.turnRightForDown.x, this.turnRightForDown.y, this.turnRightForDown.width, this.turnRightForDown.height);
+    // ctx.fillRect(this.turnLeftForLeft.x, this.turnLeftForLeft.y, this.turnLeftForLeft.width, this.turnLeftForLeft.height);
 
     //Hor lights
     if (this.horColor === colorsEnum.RED) {

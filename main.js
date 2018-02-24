@@ -92,7 +92,7 @@ AM.downloadAll(function() {
   gameEngine.addEntity(fourWay2);
 
   //Add random cars to Sim
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 25; i++) {
 
     //Get a random direction
     let direction = Math.floor((Math.random() * 4));
