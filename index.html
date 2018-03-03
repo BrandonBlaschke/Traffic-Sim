@@ -35,40 +35,6 @@
   font-size: 30px;
 }
 
-.slidecontainer {
-    width: 50%;
-}
-
-.slider {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 25px;
-    background: #d3d3d3;
-    outline: none;
-    opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
-}
-
-.slider:hover {
-    opacity: 1;
-}
-
-.slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 25px;
-    height: 25px;
-    background: #0bc5ea;
-    cursor: pointer;
-}
-
-.slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    background: #0bc5ea;
-    cursor: pointer;
-}
 </style>
 <body>
     <canvas id="gameWorld" tabindex="1" width = "800px" height = "800px" style="border: 1px solid brown; background: #2AE82A"></canvas>
@@ -77,7 +43,14 @@
     <span id="carsPassed" class="text">Cars that reached end of road:</span>
     <span id="amount" class="text">0</span>
     </div>
-    <p></p>
+    <ul>
+      <li>25 cars are randomly placed on the three roads</li>
+      <li>Cars will turn right 5% of the time</li>
+      <li>Cars will make a left turn 5% of the time</li>
+      <li>Stop lights change colors every 2 seconds</li>
+      <li>Car will stop if they are to close the bumper of the next car</li>
+      <li>Counter increases when a car makes it to the end of a road</li>
+    </ul>
 
     <!-- <div id="info">
     <span class="text">Set Time For Lights</span>

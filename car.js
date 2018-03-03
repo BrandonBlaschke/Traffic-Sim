@@ -35,7 +35,7 @@ class Car {
         this.color = '#DDE3DE';
         break;
     }
-    
+
     this.isHor = isHor;
     this.direction = direction;
     this.hitBoxWidth = 10;
@@ -233,6 +233,7 @@ class Car {
         this.turnRight = true;
       }
 
+      //go left
       if (Math.floor((Math.random() * probability)) == 1) {
         this.turnLeft = true;
         this.turnRight = false;
