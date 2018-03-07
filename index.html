@@ -31,11 +31,38 @@
   display: inline;
 }
 
+#info {
+  display: inline;
+}
+
 .text {
   font-size: 30px;
 }
 
 </style>
+
+<script>
+$(document).ready(function(){
+  //Pause game button
+  $("#PauseButton").mousedown(function() {
+    if (isPaused){
+      isPaused = false;
+    } else {
+      isPaused = true;
+    }
+  });
+
+  $("#LoadButton").mousedown(function() {
+    console.log("LOAD");
+    carsMadeIt = 0; 
+    $("#amount").html(0);
+  });
+
+  $("#SaveButton").mousedown(function() {
+    console.log("SAVE");
+  })
+});
+</script>
 <body>
     <canvas id="gameWorld" tabindex="1" width = "800px" height = "800px" style="border: 1px solid brown; background: #2AE82A"></canvas>
 
@@ -52,6 +79,11 @@
       <li>Counter increases when a car makes it to the end of a road</li>
     </ul>
 
+    <div id="info">
+    <button type="button" id="PauseButton">Pause / Resume</button>
+    <button type="button" id="LoadButton">Load</button>
+    <button type="button" id="SaveButton">Save</button>
+    </div>
     <!-- <div id="info">
     <span class="text">Set Time For Lights</span>
     <span class="text" id="time">2</span>

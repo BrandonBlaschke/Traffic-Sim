@@ -1,3 +1,7 @@
+//Global variables
+let isPaused = false;
+let carsMadeIt = 0;
+
 window.requestAnimFrame = (function () {
     return window.requestAnimationFrame ||
             window.webkitRequestAnimationFrame ||
@@ -14,7 +18,6 @@ function GameEngine() {
     this.ctx = null;
     this.surfaceWidth = null;
     this.surfaceHeight = null;
-    this.carsMadeIt = 0;
 }
 
 GameEngine.prototype.init = function (ctx) {
@@ -51,7 +54,6 @@ GameEngine.prototype.draw = function () {
 GameEngine.prototype.update = function () {
 
     //Update HTML tag
-    $("#amount").html(this.carsMadeIt);
     // lightTime = $("#myRange").val();
     // $("#time").html("" + lightTime / 1000);
     //
@@ -61,13 +63,20 @@ GameEngine.prototype.update = function () {
     //   window.clearInterval();
     // });
 
-    var entitiesCount = this.entities.length;
 
-    for (var i = 0; i < entitiesCount; i++) {
-        var entity = this.entities[i];
 
-        entity.update();
+    if (!isPaused) {
+      $("#amount").html(carsMadeIt);
+
+      var entitiesCount = this.entities.length;
+
+      for (var i = 0; i < entitiesCount; i++) {
+          var entity = this.entities[i];
+
+          entity.update();
+      }
     }
+
 }
 
 GameEngine.prototype.loop = function () {

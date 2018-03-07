@@ -245,7 +245,7 @@ class Car {
 
     //Count the cars that made it
     if (this.carMadeIt) {
-      this.game.carsMadeIt += 1;
+      carsMadeIt += 1;
       this.carMadeIt = false;
     }
     //
@@ -280,7 +280,7 @@ class Car {
     }
 
     if (this.carMadeIt) {
-      this.game.carsMadeIt += 1;
+      carsMadeIt += 1;
       this.carMadeIt = false;
     }
     this.x -= this.speed;
@@ -303,7 +303,7 @@ class Car {
 
     if (this.carMadeIt) {
       this.carMadeIt = false;
-      this.game.carsMadeIt += 1;
+      carsMadeIt += 1;
     }
 
     this.y -= this.speed;
@@ -326,7 +326,7 @@ class Car {
 
     if (this.carMadeIt) {
       this.carMadeIt = false;
-      this.game.carsMadeIt += 1;
+      carsMadeIt += 1;
     }
     this.y += this.speed;
   }
