@@ -5,10 +5,13 @@
     <meta charset="utf-8">
     <title>Traffic Sim</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
     <script type="text/javascript" src="./gameengine.js"></script>
+    <scripttype="text/javascript"src="http://localhost:8888/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="./assetmanager.js"></script>
     <script type="text/javascript" src="./road.js"></script>
     <script type="text/javascript" src="./horRoad.js"></script>
+    <script type="text/javascript" src="./db.js"></script>
     <script type="text/javascript" src="./verRoad.js"></script>
     <script type="text/javascript" src="./car.js"></script>
     <script type="text/javascript" src="./main.js"></script>
@@ -43,6 +46,7 @@
 
 <script>
 $(document).ready(function(){
+
   //Pause game button
   $("#PauseButton").mousedown(function() {
     if (isPaused){
@@ -53,13 +57,13 @@ $(document).ready(function(){
   });
 
   $("#LoadButton").mousedown(function() {
-    console.log("LOAD");
-    carsMadeIt = 0; 
+    load();
+    carsMadeIt = 0;
     $("#amount").html(0);
   });
 
   $("#SaveButton").mousedown(function() {
-    console.log("SAVE");
+    save();
   })
 });
 </script>

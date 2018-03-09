@@ -51,6 +51,35 @@ GameEngine.prototype.draw = function () {
     this.ctx.restore();
 }
 
+GameEngine.prototype.removeAll = function() {
+
+  for (let i = 0; i < this.entities.length; i++) {
+
+      if (this.entities[i] instanceof Car) {
+        this.entities.splice(i,1);
+        i--;
+      }
+  }
+}
+
+GameEngine.prototype.getCars = function () {
+
+  let cars = [];
+
+  for (let i = 0; i < this.entities.length; i++) {
+    if (this.entities[i] instanceof Car) {
+
+      //Temp Car object to avoid circular JSON
+      let tempCar = {x: this.entities[i].x, y:this.entities[i].y, isHor:this.entities[i].isHor,
+      dir:this.entities[i].direction, color:this.entities[i].color};
+
+      cars.push(tempCar);
+    }
+  }
+
+  return cars;
+}
+
 GameEngine.prototype.update = function () {
 
     //Update HTML tag
@@ -136,4 +165,14 @@ Entity.prototype.rotateAndCache = function (image, angle) {
     //offscreenCtx.strokeStyle = "red";
     //offscreenCtx.strokeRect(0,0,size,size);
     return offscreenCanvas;
+}
+
+//Load the game from a JSON
+function loadGame() {
+  console.log('LOADING GAME');
+}
+
+//Save the game as a JSON file
+function saveGame() {
+  console.log("SAVING GAME");
 }
