@@ -77,6 +77,9 @@ GameEngine.prototype.getCars = function () {
     }
   }
 
+
+  cars.push({numCars:carsMadeIt}); 
+
   return cars;
 }
 

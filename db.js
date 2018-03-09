@@ -14,17 +14,22 @@ window.onload = function () {
     globalGE.removeAll();
 
     let theData = data.data;
-
+    console.log(theData);
     let json = JSON.parse(data.data);
 
     for (i in json) {
 
-      let tempCar = new Car(globalGE, json[i].isHor, json[i].dir);
-      tempCar.x = json[i].x;
-      tempCar.y = json[i].y;
-      tempCar.color = json[i].color;
+      if (json[i].color != null) {
+        let tempCar = new Car(globalGE, json[i].isHor, json[i].dir);
+        tempCar.x = json[i].x;
+        tempCar.y = json[i].y;
+        tempCar.color = json[i].color;
 
-      globalGE.addEntity(tempCar);
+        globalGE.addEntity(tempCar);
+      } else {
+        carsMadeIt = json[i].numCars; 
+      }
+
     }
   });
 }

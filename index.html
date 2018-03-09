@@ -58,8 +58,7 @@ $(document).ready(function(){
 
   $("#LoadButton").mousedown(function() {
     load();
-    carsMadeIt = 0;
-    $("#amount").html(0);
+    $("#amount").html(carsMadeIt);
   });
 
   $("#SaveButton").mousedown(function() {
