@@ -1,5 +1,5 @@
 
-let socket = io.connect("24.16.255.56:8888");
+let socket = io.connect("http://24.16.255.56:8888");
 
 window.onload = function () {
 
@@ -27,7 +27,7 @@ window.onload = function () {
 
         globalGE.addEntity(tempCar);
       } else {
-        carsMadeIt = json[i].numCars; 
+        carsMadeIt = json[i].numCars;
       }
 
     }
